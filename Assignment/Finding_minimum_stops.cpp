@@ -1,6 +1,6 @@
 /*
     Write a code to solve this problem using a greedy algorithm.
-    Keep the time complexity of your code O(n).
+    Keep the time complexity of your code O(n^2).
 */
 #include <iostream>
 using namespace std;
@@ -8,31 +8,32 @@ using namespace std;
 int minimum_stop(int distance, int miles, int size, int station[])
 {
     int gas_station[size + 2];
-    gas_station[0] = 0; // set 0 in start position
+    gas_station[0] = 0; // set 0 in start position as a starting point.
+    // copy all element from station to gas_station.
     for (int i = 0; i < size; i++)
     {
         gas_station[i + 1] = station[i];
     }
-    gas_station[size + 1] = distance; // set distance in last position.
+    gas_station[size + 1] = distance; // set distance in last position as a end point.
 
     int NumOfStops = 0;
-    int currentPosi = 0;
+    int currentPosition = 0;
 
-    while (currentPosi < size + 1)
+    while (currentPosition < size + 1)
     {
-        int lastPosi = currentPosi;
+        int lastPosition = currentPosition; // lastPosition = where car last stoped.
         // Move to the farthest reachable gas station
-        while (currentPosi < size + 1 && gas_station[currentPosi + 1] - gas_station[lastPosi] <= miles)
+        while (currentPosition < size + 1 && gas_station[currentPosition + 1] - gas_station[lastPosition] <= miles)
         {
-            currentPosi++;
+            currentPosition++;
         }
-        if (currentPosi == lastPosi)
+        if (currentPosition == lastPosition)
         {
             return -1;
         }
-        if (currentPosi < size + 1)
+        if (currentPosition < size + 1)
         {
-            cout << "stop at gas station " << currentPosi << " (" << gas_station[currentPosi] << " miles)" << endl;
+            cout << "stop at gas station " << currentPosition << " (" << gas_station[currentPosition] << " miles)" << endl;
             NumOfStops++;
         }
     }
