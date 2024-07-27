@@ -1,5 +1,6 @@
 /*
-    8. Write a recursive program to find the products of the elements of an array of size n.
+    9. Write a recursive program to find the products of the elements
+        of an array of size n.
 */
 #include <iostream>
 using namespace std;
